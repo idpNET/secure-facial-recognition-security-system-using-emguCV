@@ -62,9 +62,9 @@ Face detection and recognition libraries
 ### Installation
 
 
-1. Download required binary files (release v1.0)
+1. Download required binary files (release v1.0 assets)
 ```sh
-https://github.com/idpNET/secure-facial-recognition-security-system-using-emguCV.git
+https://github.com/idpNET/secure-facial-recognition-security-system-using-emguCV/releases/download/v1.0/Secure.Facial.Recognition.Security.System.using.EmguCV.DLL.Files.zip
 ```
 2. Clone the repo in visual studio
 ```sh
