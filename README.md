@@ -28,6 +28,7 @@
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
+* [How it Works?](#howitworks)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -85,6 +86,46 @@ Try to train the program with various head positions in quite various directions
 
 P.S This project is well commented ! You can refer to the inline code comments for more information
 
+
+## howitworks
+
+Registeration technical procedure: 
+
+1. User's face image gets optimized for saving:
+```
+// Final optimization of the current capturing frame image
+result = currentFrame.Copy(facesDetected[i]).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+result._EqualizeHist();
+```
+2. Converting the optimized image to byte[] and encrypting the byte[] value using AESCryptography:
+```
+// Holds encrypted byte[] array of result image
+byte[] EncryptedImageBytes = AESCryptography.Encrypt(DatabaseOperations.ImageToByte(result.ToBitmap()));
+```
+3. Computing user's entered passcode hash value using PBKDF2 (SHA256 hashing Algorithm):
+```
+// Computes hash value of user's entered passcode
+byte[] PassHashValue = HashComputation.ComputeBytesHash(txtPasscodeRegister.Text, out byte[] Salt);
+```
+4. Validating users data and storing them into the database :
+```
+// Instantiates DatabaseOperations class
+DatabaseOperations dtb = new DatabaseOperations();
+dtb.ValidateDataAndRegisterUser(txtUserName.Text, PassHashValue, EncryptedImageBytes, Salt)
+```
+Login technical procedure: 
+
+1. Loading database records into a data table:
+```
+// Loads users' data and put them all into a data table using out modifier
+LoadUserData(out DataTable UsersDataTable);
+```
+2. Decrypting users' data and populating corresponding lists
+3. Computing entered passcode hash value and comparing it with the saved hash value in the data table:
+```
+// Returns True if passcode has values are the same
+LBPHRecogniser.CheckPasscode(RecogniserOutputName, txtPasscodeLogin.Text))
+```
 ## Roadmap
 
 See the [open issues](https://github.com/idpNET/secure-facial-recognition-security-system-using-emguCV/issues) for a list of proposed features (and known issues).
