@@ -123,7 +123,7 @@ LoadUserData(out DataTable UsersDataTable);
 2. Decrypting users' data and populating corresponding lists
 3. Computing entered passcode hash value and comparing it with the saved hash value in the data table:
 ```
-// Returns True if passcode has values are the same
+// Returns True if passcode hash values are the same
 LBPHRecogniser.CheckPasscode(RecogniserOutputName, txtPasscodeLogin.Text))
 ```
 ## Roadmap
