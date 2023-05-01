@@ -231,8 +231,6 @@ namespace Secure_Facial_Recognition_Security_System_using_EmguCV
                 // Final optimization of the current capturing frame image
                 result = currentFrame.Copy(facesDetected[i]).Convert<Gray, Byte>().Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
                 result._EqualizeHist();
-                // Draws a red rectangle on face region of unregistered users
-                currentFrame.Draw(facesDetected[i], new Bgr(Color.Red), 1);
 
             }
 
@@ -242,7 +240,7 @@ namespace Secure_Facial_Recognition_Security_System_using_EmguCV
             // Instantiates DatabaseOperations class
             DatabaseOperations dtb = new DatabaseOperations();
 
-            // Computes hash value of the encrypted result image
+            // Computes hash value of user's entered passcode
             byte[] PassHashValue = HashComputation.ComputeBytesHash(txtPasscodeRegister.Text, out byte[] Salt);
 
             // Validates first and then registers a new user
