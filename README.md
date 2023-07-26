@@ -36,7 +36,7 @@
 * [License](#license)
 * [Authors](#authors)
 * [Donations](#donations)
-* 
+  
 ## About The Project
 
 ![Screen Shot](Resources/Screenshot.jpg)
@@ -160,4 +160,4 @@ Contributions are what make the open source community such an amazing place to b
 ## Donations
 Your generous contributions are sincerely appreciated and will support the continued development and maintenance of my repositories, benefiting users like you who find them valuable
 
-<a href="https://www.blockonomics.co/pay-url/cb221579a6bc4ed2" target="_blank" class="blockoPayBtn" data-toggle="modal" data-uid=cb221579a6bc4ed2><img width=160 src="https://www.blockonomics.co/img/pay_with_bitcoin_medium.png"></a>
+<a href="https://www.blockonomics.co/pay-url/cb221579a6bc4ed2" class="blockoPayBtn" data-toggle="modal" data-uid=cb221579a6bc4ed2><img width=160 src="https://www.blockonomics.co/img/pay_with_bitcoin_medium.png" target="_blank" ></a>
