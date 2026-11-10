@@ -1,0 +1,6 @@
+# Local defaults. Use: docker compose -f docker/docker-compose.yml --profile dev up --build
+services:
+  api:
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      Admin__ApiKey: dev-admin-key

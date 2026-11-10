@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FaceAuth.Api/FaceAuth.Api.csproj" />
+    <Project Path="src/FaceAuth.Application/FaceAuth.Application.csproj" />
+    <Project Path="src/FaceAuth.Contracts/FaceAuth.Contracts.csproj" />
+    <Project Path="src/FaceAuth.Domain/FaceAuth.Domain.csproj" />
+    <Project Path="src/FaceAuth.Infrastructure/FaceAuth.Infrastructure.csproj" />
+  </Folder>
+</Solution>

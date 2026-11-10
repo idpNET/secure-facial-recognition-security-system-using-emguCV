@@ -1,0 +1,72 @@
+@host = http://localhost:8080
+@adminKey = dev-admin-key
+@apiKey = {{createToken.response.body.$.token}}
+@tenantId = {{createTenant.response.body.$.id}}
+@userId = {{createUser.response.body.$.id}}
+
+### Health
+GET {{host}}/health
+
+### Create tenant
+# @name createTenant
+POST {{host}}/v1/admin/tenants
+X-Admin-Key: {{adminKey}}
+Content-Type: application/json
+
+{
+  "name": "Demo Tenant"
+}
+
+### Create API token
+# @name createToken
+POST {{host}}/v1/admin/tenants/{{tenantId}}/tokens
+X-Admin-Key: {{adminKey}}
+Content-Type: application/json
+
+{
+  "name": "demo",
+  "scopes": ["users:write", "users:read", "faces:enroll", "faces:verify", "faces:delete"]
+}
+
+### Create user
+# @name createUser
+POST {{host}}/v1/users
+X-Api-Key: {{apiKey}}
+Content-Type: application/json
+
+{
+  "userName": "alice",
+  "passcode": "1234"
+}
+
+### Enroll face (multipart)
+POST {{host}}/v1/users/{{userId}}/faces
+X-Api-Key: {{apiKey}}
+Content-Type: multipart/form-data; boundary=----boundary
+
+------boundary
+Content-Disposition: form-data; name="file"; filename="face.jpg"
+Content-Type: image/jpeg
+
+< ./face.jpg
+------boundary--
+
+### Verify face
+POST {{host}}/v1/auth/verify
+X-Api-Key: {{apiKey}}
+Content-Type: multipart/form-data; boundary=----boundary
+
+------boundary
+Content-Disposition: form-data; name="file"; filename="face.jpg"
+Content-Type: image/jpeg
+
+< ./face.jpg
+------boundary
+Content-Disposition: form-data; name="passcode"
+
+1234
+------boundary--
+
+### Usage summary
+GET {{host}}/v1/admin/usage?tenantId={{tenantId}}
+X-Admin-Key: {{adminKey}}

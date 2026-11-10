@@ -1,0 +1,19 @@
+**/.git
+**/.vs
+**/bin
+**/obj
+**/Cascades
+**/Database
+**/Lib
+**/x86
+**/Resources
+**/*.mdf
+**/*.user
+**/agent-transcripts
+**/terminals
+Secure Facial Recognition Security System using EmguCV/**
+frm*.*
+Program.cs
+App.config
+Properties/
+Classes/

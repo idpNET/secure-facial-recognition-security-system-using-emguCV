@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: faceauth
+      POSTGRES_USER: faceauth
+      POSTGRES_PASSWORD: faceauth
+    ports:
+      - "5432:5432"
+    volumes:
+      - faceauth_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U faceauth -d faceauth"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__Default: Host=db;Port=5432;Database=faceauth;Username=faceauth;Password=faceauth
+      Admin__ApiKey: ${FACEAUTH_ADMIN_KEY:-change-me-admin-key}
+      Cors__AllowedOrigins__0: "*"
+      Swagger__Enabled: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  adminer:
+    profiles: ["dev"]
+    image: adminer:4
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+
+volumes:
+  faceauth_pgdata:
